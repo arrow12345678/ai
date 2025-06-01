@@ -289,6 +289,26 @@ def main():
                        help='Path to OCR model to resume training from')
     
     args = parser.parse_args()
+
+    print("=" * 50)
+    print("DATA SPLITTING")
+    print("=" * 50)
+    # Determine the base data directory, assuming args.data_dir is the intended base for 'raw', 'train', 'val', 'test'
+    # If args.data_dir is 'data/', then source_raw_dir will be 'data/raw/'
+    # The ALPRDataLoader should be initialized with args.data_dir, which becomes its self.data_dir (the destination for splits)
+    source_raw_dir = os.path.join(args.data_dir, "raw") # This will correctly form 'data/raw' if args.data_dir is 'data'
+
+    # Create a data loader instance specifically for splitting.
+    # Its self.data_dir will be the root for train/val/test output folders.
+    data_splitter = ALPRDataLoader(data_dir=args.data_dir)
+
+    print(f"Splitting data from: {source_raw_dir}")
+    print(f"Splitting data to train/val/test subdirectories under: {args.data_dir}")
+    # Call split_dataset with explicit ratios, though defaults match.
+    # split_dataset uses self.data_dir (e.g. "data") as the root for creating train/val/test folders.
+    data_splitter.split_dataset(source_dir=source_raw_dir, train_ratio=0.8, val_ratio=0.1)
+    print("Data splitting completed.")
+    print("=" * 50)
     
     # Initialize trainer
     trainer = ALPRTrainer(
