@@ -1,0 +1,145 @@
+# ALPR Project Configuration File
+# This file contains all configurable parameters for the ALPR system
+
+# Data Configuration
+data:
+  data_dir: "data"
+  raw_data_dir: "raw_data"  # For dataset splitting
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1  # Automatically calculated as 1 - train_ratio - val_ratio
+
+# Image Processing Configuration
+image_processing:
+  detection_img_size: [640, 640]  # [width, height] for detection model
+  ocr_img_size: [128, 32]         # [width, height] for OCR model
+  
+  # Data augmentation parameters
+  augmentation:
+    horizontal_flip_prob: 0.3
+    brightness_contrast_prob: 0.5
+    brightness_limit: 0.2
+    contrast_limit: 0.2
+    gaussian_noise_prob: 0.3
+    noise_var_limit: [10.0, 50.0]
+    motion_blur_prob: 0.3
+    motion_blur_limit: 3
+    rotation_prob: 0.3
+    rotation_limit: 5
+
+# Model Configuration
+models:
+  # Detection Model (YOLO-based)
+  detection:
+    input_shape: [640, 640, 3]
+    num_classes: 1  # License plate class
+    num_anchors: 3
+    backbone: "MobileNetV2"
+    pretrained_weights: "imagenet"
+    
+  # OCR Model (CRNN)
+  ocr:
+    input_shape: [32, 128, 1]  # [height, width, channels]
+    num_classes: 37  # 36 characters + blank for CTC
+    rnn_units: 128
+    dropout_rate: 0.25
+    
+  # Character set for OCR
+  character_set: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+# Training Configuration
+training:
+  # General training parameters
+  epochs: 100
+  batch_size: 16
+  learning_rate: 0.001
+  
+  # Detection model specific
+  detection:
+    batch_size: 16
+    learning_rate: 0.001
+    epochs: 100
+    
+  # OCR model specific  
+  ocr:
+    batch_size: 32
+    learning_rate: 0.001
+    epochs: 100
+  
+  # Callbacks
+  callbacks:
+    early_stopping:
+      patience: 10
+      monitor: "val_loss"
+      restore_best_weights: true
+      
+    reduce_lr_on_plateau:
+      patience: 5
+      factor: 0.5
+      min_lr: 1e-7
+      monitor: "val_loss"
+      
+    model_checkpoint:
+      monitor: "val_loss"
+      save_best_only: true
+      save_weights_only: false
+
+# Evaluation Configuration
+evaluation:
+  # Detection evaluation
+  detection:
+    iou_threshold: 0.5
+    confidence_threshold: 0.5
+    nms_threshold: 0.4
+    
+  # OCR evaluation
+  ocr:
+    max_sequence_length: 10
+
+# Prediction/Inference Configuration
+prediction:
+  confidence_threshold: 0.5
+  nms_threshold: 0.4
+  
+  # Post-processing
+  postprocessing:
+    min_plate_width: 50
+    min_plate_height: 20
+    max_plate_aspect_ratio: 6.0
+    min_plate_aspect_ratio: 1.5
+
+# Directory Configuration
+directories:
+  models: "models"
+  logs: "logs"
+  predictions: "predictions"
+  visualizations: "visualizations"
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  tensorboard:
+    log_dir: "logs"
+    histogram_freq: 1
+    write_graph: true
+    write_images: true
+    
+  csv_logging:
+    enabled: true
+    log_dir: "logs"
+
+# Hardware Configuration
+hardware:
+  use_gpu: true
+  mixed_precision: false  # Enable for faster training on compatible GPUs
+  memory_growth: true     # Allow GPU memory to grow dynamically
+  
+# Visualization Configuration
+visualization:
+  figure_size: [12, 8]
+  dpi: 150
+  bbox_color: "red"
+  bbox_linewidth: 2
+  text_color: "red"
+  text_fontsize: 12
+  save_format: "png"

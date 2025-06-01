@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "python": "C:\\Users\\haide\\AppData\\Local\\Programs\\Python\\Python311\\python.exe"
+        },
+        {
+            "name": "Python: Test TensorFlow",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_tensorflow_import.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "python": "C:\\Users\\haide\\AppData\\Local\\Programs\\Python\\Python311\\python.exe"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "folders": [
+        {
+            "path": ".."
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "C:\\Users\\haide\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "python.analysis.extraPaths": [
+            "C:\\Users\\haide\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages"
+        ],
+        "python.analysis.typeCheckingMode": "off",
+        "python.analysis.autoSearchPaths": true,
+        "python.analysis.diagnosticMode": "workspace",
+        "python.envFile": "${workspaceFolder}/.env"
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",
+            "ms-python.pylance"
+        ]
+    }
+}
