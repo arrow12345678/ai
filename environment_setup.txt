@@ -1,0 +1,48 @@
+## Environment Setup
+
+### Chosen Development Environment: Google Colab
+
+Google Colaboratory (Colab) was selected as the primary development environment for this project. Colab offers a convenient and powerful platform for machine learning tasks, providing free access to GPU resources and a pre-configured Python environment.
+
+### Basic Setup Steps for Google Colab:
+
+1.  **Access Google Colab:** Open your web browser and navigate to [https://colab.research.google.com/](https://colab.research.google.com/).
+2.  **Sign In:** Sign in with your Google account.
+3.  **Create a New Notebook:**
+    *   Click on `File` in the menu bar.
+    *   Select `New notebook`.
+    *   This will open a new, untitled Colab notebook (`.ipynb` file) ready for use.
+4.  **Rename the Notebook (Optional but Recommended):**
+    *   Click on the default name (e.g., `Untitled0.ipynb`) at the top left of the page.
+    *   Enter a descriptive name for your project notebook.
+5.  **Select Hardware Accelerator (GPU Recommended for Deep Learning):**
+    *   Click on `Runtime` in the menu bar.
+    *   Select `Change runtime type`.
+    *   Under `Hardware accelerator`, choose `GPU` from the dropdown menu.
+    *   Click `Save`.
+
+With these steps, the Google Colab environment is ready for installing necessary libraries and developing the license plate recognition system.
+
+### Alternative: Local Environment Setup
+
+While Google Colab is recommended, development can also be done in a local environment.
+
+**Requirements for a Local Environment:**
+
+*   **Python:** Version 3.8 or higher.
+*   **pip:** Python package installer (usually comes with Python).
+
+**Basic Setup Steps for a Local Environment:**
+
+1.  **Install Python:** Download and install Python from [https://www.python.org/](https://www.python.org/). Ensure you add Python to your system's PATH during installation.
+2.  **Verify Installation:** Open a terminal or command prompt and type `python --version` and `pip --version` to confirm successful installation.
+3.  **Create a Project Directory:** Create a dedicated folder for your project.
+4.  **Set up a Virtual Environment (Recommended):**
+    *   Navigate to your project directory in the terminal.
+    *   Run `python -m venv venv` to create a virtual environment named `venv`.
+    *   Activate the virtual environment:
+        *   On Windows: `venv\Scripts\activate`
+        *   On macOS/Linux: `source venv/bin/activate`
+5.  **Install Libraries:** Once the virtual environment is active, you can install required libraries using `pip install <library_name>`.
+
+Using a local environment provides more control but requires manual management of dependencies and computational resources.
